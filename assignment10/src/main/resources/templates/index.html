@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Employee Task Manager</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Phosphor Icons for modern icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <i class="ph ph-kanban"></i> FacultyTasks
+        </a>
+        <div class="nav-links">
+            <a href="/" class="active">Dashboard</a>
+            <a href="/employees">Faculty Members</a>
+            <a href="/tasks">Task Assignments</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Department Dashboard</h1>
+            <a href="/tasks" class="btn btn-primary">
+                <i class="ph ph-plus"></i> Assign New Task
+            </a>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="card stat-card">
+                <div class="stat-number" th:text="${employeeCount}">0</div>
+                <div class="stat-label">Total Faculty Members</div>
+            </div>
+            
+            <div class="card stat-card">
+                <div class="stat-number" th:text="${taskCount}">0</div>
+                <div class="stat-label">Total Tasks Assigned</div>
+            </div>
+
+            <div class="card" style="display: flex; flex-direction: column; justify-content: center;">
+                <h3 style="margin-bottom: 1rem; color: var(--text-main);">Quick Actions</h3>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="/employees" class="btn btn-success" style="text-align: center; width: 100%;">
+                        <i class="ph ph-users"></i> Manage Faculty
+                    </a>
+                    <a href="/tasks" class="btn btn-primary" style="text-align: center; width: 100%;">
+                        <i class="ph ph-list-checks"></i> View All Tasks
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h2>System Overview</h2>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">
+                The Faculty Task Management System allows the Engineering Department to seamlessly digitalise exam duties, project guide allocations, documentation, event coordination, and miscellaneous report tracking. 
+            </p>
+        </div>
+    </div>
+</body>
+</html>

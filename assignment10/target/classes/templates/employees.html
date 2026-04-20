@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Members - Employee Task Manager</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <i class="ph ph-kanban"></i> FacultyTasks
+        </a>
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/employees" class="active">Faculty Members</a>
+            <a href="/tasks">Task Assignments</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Faculty Roster</h1>
+        </div>
+
+        <div class="split-layout">
+            <!-- Table Section -->
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="employee : ${employees}">
+                            <td th:text="${employee.id}">1</td>
+                            <td th:text="${employee.name}">John Doe</td>
+                            <td th:text="${employee.department}">Computer Science</td>
+                            <td th:text="${employee.email}">john@college.edu</td>
+                            <td>
+                                <form th:action="@{/employees/delete/{id}(id=${employee.id})}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove this faculty member?');">
+                                        <i class="ph ph-trash"></i> Remove
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(employees)}">
+                            <td colspan="5" style="text-align: center; color: var(--text-muted);">No faculty members registered.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Form Section -->
+            <div class="card">
+                <h2 style="margin-bottom: 1.5rem;">Add New Faculty Member</h2>
+                <form th:action="@{/employees}" th:object="${newEmployee}" method="post">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" th:field="*{name}" required placeholder="e.g. Dr. Alan Turing">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Department</label>
+                        <select class="form-control" th:field="*{department}" required>
+                            <option value="">Select Department</option>
+                            <option value="Computer Engineering">Computer Engineering</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control" th:field="*{email}" required placeholder="faculty@college.edu">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="ph ph-user-plus"></i> Add Faculty
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

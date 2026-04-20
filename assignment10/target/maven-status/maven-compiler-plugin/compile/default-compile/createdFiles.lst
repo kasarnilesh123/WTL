@@ -1,0 +1,6 @@
+com\example\taskmanager\controller\TaskController.class
+com\example\taskmanager\model\Employee.class
+com\example\taskmanager\model\Task.class
+com\example\taskmanager\repository\EmployeeRepository.class
+com\example\taskmanager\repository\TaskRepository.class
+com\example\taskmanager\TaskmanagerApplication.class
